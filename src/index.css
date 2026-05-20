@@ -38,6 +38,11 @@
 /* ====== BASE RESET ====== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+#root {
+  min-height: 100vh;
+  isolation: isolate;
+}
+
 html {
   background: var(--bg);
   min-height: 100%;
@@ -71,6 +76,8 @@ body {
   inset: 0;
   z-index: -3;
   pointer-events: none;
+  contain: layout paint style;
+  transform: translate3d(0, 0, 0);
   background:
     /* edge vignette — static, no flicker */
     radial-gradient(ellipse 86% 82% at 50% 50%,
@@ -115,6 +122,7 @@ body {
   mix-blend-mode: screen;
   pointer-events: none;
   animation: grainDrift 64s linear infinite;
+  will-change: background-position;
 }
 
 /* Halftone register lines + screentone dots — manga / zine print */
@@ -138,7 +146,7 @@ body {
 /* ====== HALFTONE STREETMAP OVERLAY — JSR-style big dots ====== */
 .bg-halftone {
   position: fixed;
-  inset: 0;
+  inset: -14px;
   z-index: -1;
   pointer-events: none;
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.10) 1.5px, transparent 2px);
@@ -146,11 +154,13 @@ body {
   mix-blend-mode: overlay;
   opacity: 0.7;
   animation: halftoneDrift 40s linear infinite;
+  contain: layout paint style;
+  will-change: transform;
 }
 
 @keyframes halftoneDrift {
-  from { background-position: 0 0; }
-  to   { background-position: 14px 14px; }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(14px, 14px, 0); }
 }
 
 /* ====== PSX VERTEX JITTER — geometry snap shake ====== */
@@ -179,6 +189,8 @@ body {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  contain: layout paint style;
+  transform: translate3d(0, 0, 0);
 }
 
 .splat {
@@ -237,15 +249,17 @@ body {
     radial-gradient(circle at 48% 48%, rgba(255, 40, 90, 0.18) 0%, transparent 32%);
   background-size: 220% 220%;
   animation: bgFlow 22s ease-in-out infinite alternate;
-  will-change: background-position;
+  contain: layout paint style;
+  will-change: transform;
+  transform: translate3d(0, 0, 0) scale(1.02);
 }
 
 @keyframes bgFlow {
-  0%   { background-position:   0%   0%; }
-  25%  { background-position: 100%  20%; }
-  50%  { background-position:  80% 100%; }
-  75%  { background-position:  10%  80%; }
-  100% { background-position: 100% 100%; }
+  0%   { transform: translate3d(-4%, -3%, 0) scale(1.04); }
+  25%  { transform: translate3d( 4%, -2%, 0) scale(1.05); }
+  50%  { transform: translate3d( 3%,  4%, 0) scale(1.04); }
+  75%  { transform: translate3d(-3%,  3%, 0) scale(1.05); }
+  100% { transform: translate3d( 4%,  4%, 0) scale(1.04); }
 }
 
 /* ====== COUNTER-ROTATING SWIRL LAYERS ====== */
@@ -255,6 +269,7 @@ body {
   z-index: -2;
   pointer-events: none;
   mix-blend-mode: screen;
+  contain: layout paint style;
   will-change: transform;
 }
 
@@ -288,6 +303,8 @@ body {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
+  contain: layout paint style;
+  transform: translate3d(0, 0, 0);
 }
 
 .chrome-orb {
@@ -369,10 +386,11 @@ body {
    ============================================================ */
 .scan-tear {
   position: fixed;
+  top: 0;
   left: 0;
   right: 0;
   height: 18px;
-  z-index: 8000;
+  z-index: 1;
   pointer-events: none;
   background: linear-gradient(180deg,
     transparent 0%,
@@ -384,13 +402,16 @@ body {
   mix-blend-mode: screen;
   filter: blur(0.5px);
   animation: scanTear 14s linear infinite;
+  contain: layout paint style;
+  will-change: transform, opacity;
+  transform: translate3d(0, -5vh, 0);
 }
 
 @keyframes scanTear {
-  0%   { top: -5%; opacity: 0; }
+  0%   { transform: translate3d(0, -5vh, 0); opacity: 0; }
   5%   { opacity: 1; }
   92%  { opacity: 1; }
-  100% { top: 105%; opacity: 0; }
+  100% { transform: translate3d(0, 105vh, 0); opacity: 0; }
 }
 
 @keyframes grainDrift {
@@ -408,6 +429,8 @@ body {
   z-index: 5;
   pointer-events: none;
   overflow: hidden;
+  contain: layout paint style;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Vertical edge text — like Honda S2000 ad margin copyright */
@@ -742,6 +765,7 @@ body {
   z-index: 1;
   animation: avatarSpin 8s linear infinite;
   opacity: 0.55;
+  will-change: transform;
 }
 
 /* STREET MEGA TITLE — Bungee block + PSX jitter + chromatic */
@@ -759,6 +783,7 @@ body {
   animation:
     chromaDrift 10s ease-in-out infinite alternate,
     psxJitterStrong 0.25s steps(5) infinite;
+  will-change: transform, text-shadow;
 }
 
 @keyframes chromaDrift {
@@ -819,6 +844,7 @@ body {
   overflow: visible;
   transition: border-color 0.25s ease, transform 0.4s ease;
   backdrop-filter: blur(12px);
+  transform: translate3d(0, 0, 0);
   outline: 1px solid rgba(255, 130, 220, 0.10);
   outline-offset: 5px;
   box-shadow:
@@ -847,7 +873,7 @@ body {
   pointer-events: none;
 }
 
-.project-card:hover { border-color: var(--panel-edge-hi); transform: translateY(-2px); }
+.project-card:hover { border-color: var(--panel-edge-hi); transform: translate3d(0, -2px, 0); }
 
 .project-grid {
   display: grid;
@@ -881,6 +907,7 @@ body {
   border: 2px solid var(--ink-black);
   color: var(--ink-black);
   box-shadow: 3px 3px 0 var(--ink-black);
+  position: relative;
   transition: transform 0.18s ease;
 }
 
@@ -918,6 +945,7 @@ body {
      0 0 30px rgba(180, 80, 255, 0.30);
   animation: psxJitter 0.3s steps(5) infinite;
   display: inline-block;
+  will-change: transform;
 }
 
 .project-subtitle {
@@ -1000,8 +1028,6 @@ body {
 }
 
 /* ====== SCREENSHOT MOCKUP FRAME ====== */
-.project-visual {}
-
 .visual-frame {
   border: 1px solid rgba(34,102,255,0.32);
   background: rgba(0, 6, 26, 0.85);
@@ -1009,6 +1035,7 @@ body {
   outline: 1px solid rgba(85, 153, 255, 0.14);
   outline-offset: 4px;
   position: relative;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Hairline crop ticks on frame corners */
@@ -1068,6 +1095,7 @@ body {
     saturate(1.25)
     drop-shadow(-2px 0 0 rgba(255, 60, 175, 0.45))
     drop-shadow(2px 0 0 rgba(0, 200, 255, 0.40));
+  backface-visibility: hidden;
 }
 
 /* Scan overlay on screenshot — VHS feel */
@@ -1115,8 +1143,6 @@ body {
 .project-screenshot:only-child { display: block; }
 
 /* Gallery tabs */
-.visual-gallery {}
-
 .gallery-tabs { display: flex; }
 
 .tab-btn {
@@ -1155,6 +1181,7 @@ body {
   padding: 28px 22px;
   backdrop-filter: blur(10px);
   transition: border-left-color 0.2s;
+  transform: translate3d(0, 0, 0);
 }
 
 .skill-card:hover { border-left-color: var(--electric-bright); }
@@ -1199,6 +1226,7 @@ body {
   position: relative;
   backdrop-filter: blur(10px);
   transition: border-color 0.22s;
+  transform: translate3d(0, 0, 0);
 }
 
 .credential-card:hover { border-color: var(--panel-edge-hi); }
@@ -1303,4 +1331,15 @@ body {
   .project-grid.reverse .project-visual { order: 0; }
   .skills-grid { grid-template-columns: 1fr; }
   .hero-title { font-size: clamp(3.5rem, 22vw, 6rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
