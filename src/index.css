@@ -51,8 +51,10 @@ body {
   font-size: 14px;
   line-height: 1.6;
   overflow-x: hidden;
-  background: transparent;
+  background: var(--bg);
   padding-bottom: 80px;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* ====== SCROLLBAR ====== */
@@ -110,10 +112,9 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.76' numOctaves='4' seed='11'/><feColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.70 0 0 0 0 1 0 0 0 0.50 -0.12'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.76' numOctaves='4' seed='11'/><feColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.70 0 0 0 0 1 0 0 0 0.18 -0.04'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
   background-size: 220px 220px;
-  opacity: 0.13;
-  mix-blend-mode: screen;
+  opacity: 0.45;
   pointer-events: none;
   animation: grainDrift 64s linear infinite;
 }
@@ -135,12 +136,10 @@ body {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.10) 1.5px, transparent 2px);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1.5px, transparent 2px);
   background-size: 14px 14px;
-  mix-blend-mode: overlay;
-  opacity: 0.7;
+  opacity: 0.85;
   transform: translateZ(0);
-  will-change: background-position;
   animation: halftoneDrift 40s linear infinite;
 }
 
@@ -314,8 +313,6 @@ body {
     inset -18px -28px 45px rgba(0, 0, 0, 0.55),
     /* inner highlight top-left — specular */
     inset 10px 14px 24px rgba(255, 255, 255, 0.45);
-  will-change: transform;
-  transform: translateZ(0);
 }
 
 /* Tiny specular hotspot on each orb */
@@ -344,16 +341,16 @@ body {
 }
 
 /* Spread sparsely across the viewport, hugging edges and corners */
-.orb-1  { width: 220px; height: 220px; top:  3%;  left:   2%; animation: orbDrift1  32s ease-in-out infinite alternate; }
-.orb-2  { width: 140px; height: 140px; top:  6%;  right:  3%; animation: orbDrift2  40s ease-in-out infinite alternate; }
-.orb-3  { width:  60px; height:  60px; top: 22%;  left:  42%; animation: orbDrift3  28s ease-in-out infinite alternate; }
-.orb-4  { width:  75px; height:  75px; top: 30%;  right: 24%; animation: orbDrift4  44s ease-in-out infinite alternate; }
-.orb-5  { width: 160px; height: 160px; top: 42%;  left:   4%; animation: orbDrift5  24s ease-in-out infinite alternate; }
-.orb-6  { width: 200px; height: 200px; top: 56%;  right:  2%; animation: orbDrift6  36s ease-in-out infinite alternate; }
-.orb-7  { width:  90px; height:  90px; top: 68%;  left:  34%; animation: orbDrift7  42s ease-in-out infinite alternate-reverse; }
-.orb-8  { width: 110px; height: 110px; top: 76%;  left:   3%; animation: orbDrift8  30s ease-in-out infinite alternate; }
-.orb-9  { width: 100px; height: 100px; top: 84%;  right: 22%; animation: orbDrift9  50s ease-in-out infinite alternate-reverse; }
-.orb-10 { width: 130px; height: 130px; top: 92%;  right: 46%; animation: orbDrift10 34s ease-in-out infinite alternate; }
+.orb-1  { width: 220px; height: 220px; top:  3%;  left:   2%; animation: orbDrift1  58s ease-in-out infinite alternate; }
+.orb-2  { width: 140px; height: 140px; top:  6%;  right:  3%; animation: orbDrift2  72s ease-in-out infinite alternate; }
+.orb-3  { width:  60px; height:  60px; top: 22%;  left:  42%; animation: orbDrift3  52s ease-in-out infinite alternate; }
+.orb-4  { width:  75px; height:  75px; top: 30%;  right: 24%; animation: orbDrift4  78s ease-in-out infinite alternate; }
+.orb-5  { width: 160px; height: 160px; top: 42%;  left:   4%; animation: orbDrift5  46s ease-in-out infinite alternate; }
+.orb-6  { width: 200px; height: 200px; top: 56%;  right:  2%; animation: orbDrift6  64s ease-in-out infinite alternate; }
+.orb-7  { width:  90px; height:  90px; top: 68%;  left:  34%; animation: orbDrift7  74s ease-in-out infinite alternate-reverse; }
+.orb-8  { width: 110px; height: 110px; top: 76%;  left:   3%; animation: orbDrift8  56s ease-in-out infinite alternate; }
+.orb-9  { width: 100px; height: 100px; top: 84%;  right: 22%; animation: orbDrift9  88s ease-in-out infinite alternate-reverse; }
+.orb-10 { width: 130px; height: 130px; top: 92%;  right: 46%; animation: orbDrift10 62s ease-in-out infinite alternate; }
 
 @keyframes orbDrift1  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d( 140px,  100px, 0) rotate( 70deg); } }
 @keyframes orbDrift2  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d(-120px,  150px, 0) rotate(-55deg); } }
@@ -1149,7 +1146,7 @@ body {
   border-left: 3px solid var(--electric);
   padding: 28px 22px;
   transition: border-left-color 0.2s;
-  contain: layout style paint;
+  contain: layout style;
 }
 
 .skill-card:hover { border-left-color: var(--electric-bright); }
@@ -1193,7 +1190,7 @@ body {
   padding: 28px;
   position: relative;
   transition: border-color 0.22s;
-  contain: layout style paint;
+  contain: layout style;
 }
 
 .credential-card:hover { border-color: var(--panel-edge-hi); }
@@ -1551,4 +1548,10 @@ body {
 @media (hover: none) {
   .project-btn:hover { transform: none; }
   .project-card:hover { transform: none; }
+
+  /* Mobile GPU compositors hate mix-blend-mode at scale — disable the
+     two heaviest blended layers on touch devices (fixes Android black
+     square flicker bug). The look stays close via opacity. */
+  .bg-swirl-a, .bg-swirl-b { mix-blend-mode: normal; opacity: 0.45; }
+  .splat { mix-blend-mode: normal; opacity: 0.16; }
 }
