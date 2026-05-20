@@ -4,25 +4,48 @@ function App() {
   const [activeTab, setActiveTab] = useState('settings');
 
   useEffect(() => {
-    const warmImages = () => {
-      ['rammy.jpg', 'tinypic_settings.png', 'tinypic_preview.png'].forEach((src) => {
+    let cancelled = false;
+    let frameId;
+    let idleId;
+    let timeoutId;
+
+    const warmImages = async () => {
+      for (const src of ['rammy.jpg', 'tinypic_settings.png', 'tinypic_preview.png']) {
+        if (cancelled) return;
+
         const img = new Image();
-        img.decoding = 'sync';
+        img.decoding = 'async';
         img.loading = 'eager';
         img.src = src;
         if (img.decode) {
-          img.decode().catch(() => {});
+          try {
+            await img.decode();
+          } catch {
+            // Ignore decode misses; normal image loading still handles it.
+          }
         }
-      });
+      }
     };
 
-    let timeoutId;
-    let frameId = requestAnimationFrame(() => {
-      timeoutId = setTimeout(warmImages, 0);
+    const scheduleWarmImages = () => {
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(warmImages, { timeout: 2500 });
+        return;
+      }
+
+      timeoutId = setTimeout(warmImages, 750);
+    };
+
+    frameId = requestAnimationFrame(() => {
+      timeoutId = setTimeout(scheduleWarmImages, 250);
     });
 
     return () => {
+      cancelled = true;
       cancelAnimationFrame(frameId);
+      if (idleId) {
+        window.cancelIdleCallback(idleId);
+      }
       clearTimeout(timeoutId);
     };
   }, []);
@@ -146,7 +169,7 @@ function App() {
                     <span className="frame-title">RAMMY Dashboard</span>
                   </div>
                   <div className="frame-body">
-                    <img src="rammy.jpg" alt="RAMMY Desktop Application Screenshot" className="project-screenshot" width="1024" height="658" decoding="sync" style={{display:'block'}} />
+                    <img src="rammy.jpg" alt="RAMMY Desktop Application Screenshot" className="project-screenshot" width="1024" height="658" decoding="async" style={{display:'block'}} />
                   </div>
                 </div>
               </div>
@@ -203,8 +226,8 @@ function App() {
                     </div>
                     <div className="frame-body">
                       {activeTab === 'settings'
-                        ? <img src="tinypic_settings.png" alt="TinyPic Settings Interface"    className="project-screenshot" width="496" height="811" decoding="sync" style={{display:'block'}} />
-                        : <img src="tinypic_preview.png"  alt="TinyPic Image Preview Screen" className="project-screenshot" width="538" height="559" decoding="sync" style={{display:'block'}} />
+                        ? <img src="tinypic_settings.png" alt="TinyPic Settings Interface"    className="project-screenshot" width="496" height="811" decoding="async" style={{display:'block'}} />
+                        : <img src="tinypic_preview.png"  alt="TinyPic Image Preview Screen" className="project-screenshot" width="538" height="559" decoding="async" style={{display:'block'}} />
                       }
                     </div>
                   </div>
