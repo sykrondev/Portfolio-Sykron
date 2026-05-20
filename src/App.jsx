@@ -122,7 +122,7 @@ function App() {
                     <span className="frame-title">RAMMY Dashboard</span>
                   </div>
                   <div className="frame-body">
-                    <img src="rammy.jpg" alt="RAMMY Desktop Application Screenshot" className="project-screenshot" width="1024" height="658" loading="lazy" decoding="async" style={{display:'block'}} />
+                    <img src="rammy.jpg" alt="RAMMY Desktop Application Screenshot" className="project-screenshot" width="1024" height="658" decoding="async" style={{display:'block'}} />
                   </div>
                 </div>
               </div>
@@ -179,8 +179,8 @@ function App() {
                     </div>
                     <div className="frame-body">
                       {activeTab === 'settings'
-                        ? <img src="tinypic_settings.png" alt="TinyPic Settings Interface"    className="project-screenshot" width="496" height="811" loading="lazy" decoding="async" style={{display:'block'}} />
-                        : <img src="tinypic_preview.png"  alt="TinyPic Image Preview Screen" className="project-screenshot" width="538" height="559" loading="lazy" decoding="async" style={{display:'block'}} />
+                        ? <img src="tinypic_settings.png" alt="TinyPic Settings Interface"    className="project-screenshot" width="496" height="811" decoding="async" style={{display:'block'}} />
+                        : <img src="tinypic_preview.png"  alt="TinyPic Image Preview Screen" className="project-screenshot" width="538" height="559" decoding="async" style={{display:'block'}} />
                       }
                     </div>
                   </div>
