@@ -1,54 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function App() {
   const [activeTab, setActiveTab] = useState('settings');
-
-  useEffect(() => {
-    let cancelled = false;
-    let frameId;
-    let idleId;
-    let timeoutId;
-
-    const warmImages = async () => {
-      for (const src of ['rammy.jpg', 'tinypic_settings.png', 'tinypic_preview.png']) {
-        if (cancelled) return;
-
-        const img = new Image();
-        img.decoding = 'async';
-        img.loading = 'eager';
-        img.src = src;
-        if (img.decode) {
-          try {
-            await img.decode();
-          } catch {
-            // Ignore decode misses; normal image loading still handles it.
-          }
-        }
-      }
-    };
-
-    const scheduleWarmImages = () => {
-      if ('requestIdleCallback' in window) {
-        idleId = window.requestIdleCallback(warmImages, { timeout: 2500 });
-        return;
-      }
-
-      timeoutId = setTimeout(warmImages, 750);
-    };
-
-    frameId = requestAnimationFrame(() => {
-      timeoutId = setTimeout(scheduleWarmImages, 250);
-    });
-
-    return () => {
-      cancelled = true;
-      cancelAnimationFrame(frameId);
-      if (idleId) {
-        window.cancelIdleCallback(idleId);
-      }
-      clearTimeout(timeoutId);
-    };
-  }, []);
 
   return (
     <>
@@ -71,9 +24,6 @@ function App() {
         <div className="chrome-orb orb-5" />
         <div className="chrome-orb orb-6" />
       </div>
-
-      {/* Horizontal scan tear band — VHS tracking artifact */}
-      <div className="scan-tear" aria-hidden="true" />
 
       {/* JSR halftone screentone overlay */}
       <div className="bg-halftone" aria-hidden="true" />
@@ -169,7 +119,7 @@ function App() {
                     <span className="frame-title">RAMMY Dashboard</span>
                   </div>
                   <div className="frame-body">
-                    <img src="rammy.jpg" alt="RAMMY Desktop Application Screenshot" className="project-screenshot" width="1024" height="658" decoding="async" style={{display:'block'}} />
+                    <img src="rammy.jpg" alt="RAMMY Desktop Application Screenshot" className="project-screenshot" width="1024" height="658" loading="lazy" decoding="async" fetchPriority="low" style={{display:'block'}} />
                   </div>
                 </div>
               </div>
@@ -226,8 +176,8 @@ function App() {
                     </div>
                     <div className="frame-body">
                       {activeTab === 'settings'
-                        ? <img src="tinypic_settings.png" alt="TinyPic Settings Interface"    className="project-screenshot" width="496" height="811" decoding="async" style={{display:'block'}} />
-                        : <img src="tinypic_preview.png"  alt="TinyPic Image Preview Screen" className="project-screenshot" width="538" height="559" decoding="async" style={{display:'block'}} />
+                        ? <img src="tinypic_settings.png" alt="TinyPic Settings Interface"    className="project-screenshot" width="496" height="811" loading="lazy" decoding="async" fetchPriority="low" style={{display:'block'}} />
+                        : <img src="tinypic_preview.png"  alt="TinyPic Image Preview Screen" className="project-screenshot" width="538" height="559" loading="lazy" decoding="async" fetchPriority="low" style={{display:'block'}} />
                       }
                     </div>
                   </div>
