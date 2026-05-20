@@ -576,13 +576,14 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   position: relative;
   -webkit-text-stroke: 1px rgba(255, 130, 220, 0.35);
   text-shadow:
     2px 2px 0 rgba(255, 60, 175, 0.45),
     4px 4px 0 rgba(0, 200, 255, 0.30);
 }
+
 
 .section-kana {
   font-family: var(--font-mono);
@@ -603,6 +604,7 @@ body {
 
 .section-title-text {
   flex: 1;
+  white-space: nowrap;
 }
 
 /* Fading line after title */
