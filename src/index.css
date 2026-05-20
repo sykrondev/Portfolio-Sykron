@@ -341,27 +341,27 @@ body {
 }
 
 /* Spread sparsely across the viewport, hugging edges and corners */
-.orb-1  { width: 220px; height: 220px; top:  3%;  left:   2%; animation: orbDrift1  58s ease-in-out infinite alternate; }
-.orb-2  { width: 140px; height: 140px; top:  6%;  right:  3%; animation: orbDrift2  72s ease-in-out infinite alternate; }
-.orb-3  { width:  60px; height:  60px; top: 22%;  left:  42%; animation: orbDrift3  52s ease-in-out infinite alternate; }
-.orb-4  { width:  75px; height:  75px; top: 30%;  right: 24%; animation: orbDrift4  78s ease-in-out infinite alternate; }
-.orb-5  { width: 160px; height: 160px; top: 42%;  left:   4%; animation: orbDrift5  46s ease-in-out infinite alternate; }
-.orb-6  { width: 200px; height: 200px; top: 56%;  right:  2%; animation: orbDrift6  64s ease-in-out infinite alternate; }
-.orb-7  { width:  90px; height:  90px; top: 68%;  left:  34%; animation: orbDrift7  74s ease-in-out infinite alternate-reverse; }
-.orb-8  { width: 110px; height: 110px; top: 76%;  left:   3%; animation: orbDrift8  56s ease-in-out infinite alternate; }
-.orb-9  { width: 100px; height: 100px; top: 84%;  right: 22%; animation: orbDrift9  88s ease-in-out infinite alternate-reverse; }
-.orb-10 { width: 130px; height: 130px; top: 92%;  right: 46%; animation: orbDrift10 62s ease-in-out infinite alternate; }
+.orb-1  { width: 220px; height: 220px; top:  3%;  left:   2%; animation: orbDrift1  26s ease-in-out infinite alternate; }
+.orb-2  { width: 140px; height: 140px; top:  6%;  right:  3%; animation: orbDrift2  32s ease-in-out infinite alternate; }
+.orb-3  { width:  60px; height:  60px; top: 22%;  left:  42%; animation: orbDrift3  22s ease-in-out infinite alternate; }
+.orb-4  { width:  75px; height:  75px; top: 30%;  right: 24%; animation: orbDrift4  34s ease-in-out infinite alternate; }
+.orb-5  { width: 160px; height: 160px; top: 42%;  left:   4%; animation: orbDrift5  20s ease-in-out infinite alternate; }
+.orb-6  { width: 200px; height: 200px; top: 56%;  right:  2%; animation: orbDrift6  28s ease-in-out infinite alternate; }
+.orb-7  { width:  90px; height:  90px; top: 68%;  left:  34%; animation: orbDrift7  36s ease-in-out infinite alternate-reverse; }
+.orb-8  { width: 110px; height: 110px; top: 76%;  left:   3%; animation: orbDrift8  24s ease-in-out infinite alternate; }
+.orb-9  { width: 100px; height: 100px; top: 84%;  right: 22%; animation: orbDrift9  40s ease-in-out infinite alternate-reverse; }
+.orb-10 { width: 130px; height: 130px; top: 92%;  right: 46%; animation: orbDrift10 30s ease-in-out infinite alternate; }
 
-@keyframes orbDrift1  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d( 140px,  100px, 0) rotate( 70deg); } }
-@keyframes orbDrift2  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d(-120px,  150px, 0) rotate(-55deg); } }
-@keyframes orbDrift3  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d( 100px, -110px, 0) rotate( 90deg); } }
-@keyframes orbDrift4  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d(-150px, -130px, 0) rotate(-65deg); } }
-@keyframes orbDrift5  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d(  80px,  110px, 0) rotate( 80deg); } }
-@keyframes orbDrift6  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d( -90px, -100px, 0) rotate(-95deg); } }
-@keyframes orbDrift7  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d( 110px,  -90px, 0) rotate( 60deg); } }
-@keyframes orbDrift8  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d(-100px,  120px, 0) rotate(-70deg); } }
-@keyframes orbDrift9  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d( 130px,  -80px, 0) rotate( 85deg); } }
-@keyframes orbDrift10 { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d(-110px,  -95px, 0) rotate(-80deg); } }
+@keyframes orbDrift1  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d( 240px,  180px, 0) rotate(120deg); } }
+@keyframes orbDrift2  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d(-220px,  260px, 0) rotate(-95deg); } }
+@keyframes orbDrift3  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d( 200px, -210px, 0) rotate(160deg); } }
+@keyframes orbDrift4  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d(-260px, -240px, 0) rotate(-115deg); } }
+@keyframes orbDrift5  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d( 160px,  210px, 0) rotate(140deg); } }
+@keyframes orbDrift6  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d(-180px, -200px, 0) rotate(-160deg); } }
+@keyframes orbDrift7  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d( 220px, -180px, 0) rotate(110deg); } }
+@keyframes orbDrift8  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d(-200px,  230px, 0) rotate(-130deg); } }
+@keyframes orbDrift9  { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d( 250px, -160px, 0) rotate(150deg); } }
+@keyframes orbDrift10 { from { transform: translate3d(0,0,0) rotate(0deg); }   to { transform: translate3d(-210px, -200px, 0) rotate(-145deg); } }
 
 @keyframes grainDrift {
   from { background-position: 0 0; }
